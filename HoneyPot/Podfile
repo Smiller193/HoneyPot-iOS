@@ -9,5 +9,12 @@ target 'HoneyPot' do
   pod 'Firebase/Database’
   pod 'Firebase/Storage’
   pod 'Firebase/Messaging’
+  pod ’SwiftyJSON’
+  pod 'Alamofire'
+  pod 'AlamofireImage'
+  pod 'AlamofireNetworkActivityIndicator'
+  pod ‘SVProgressHUD’
+  pod ‘TextFieldEffects’
+  pod 'SnapKit', '~> 4.0'
   # Pods for HoneyPot
 end
