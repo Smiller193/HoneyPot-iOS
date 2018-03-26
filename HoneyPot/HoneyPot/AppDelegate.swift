@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = LoginViewController()
+        window?.backgroundColor = UIColor.white
+        configureInitialRootViewController(for: window)
         // Override point for customization after application launch.
         return true
     }
@@ -47,7 +48,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+}
 
-
+extension AppDelegate {
+    func configureInitialRootViewController(for window: UIWindow?) {
+        // print("Look for current user here")
+        // print(Auth.auth().currentUser ?? "")
+        let defaults = UserDefaults.standard
+        var initialViewController: UIViewController
+        // print(Auth.auth().currentUser ?? "")
+        if Auth.auth().currentUser != nil,
+            let userData = defaults.object(forKey: "currentUser") as? Data,
+            let user = NSKeyedUnarchiver.unarchiveObject(with: userData) as? User {
+            
+            User.setCurrent(user, writeToUserDefaults: true)
+            // print("root view controller set to home view controller")
+            initialViewController = HomeViewController()
+            
+        } else {
+            // print("root view controller set to login view controller")
+            initialViewController = LoginViewController()
+        }
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
+    }
 }
 

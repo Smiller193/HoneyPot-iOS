@@ -11,6 +11,12 @@
 		0763FECD205C30D500A0EF72 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763FECC205C30D500A0EF72 /* Storage.swift */; };
 		0763FECF205C311C00A0EF72 /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763FECE205C311C00A0EF72 /* NSLayoutConstraint.swift */; };
 		0763FED2205C326600A0EF72 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763FED1205C326600A0EF72 /* AuthService.swift */; };
+		07CAA8B0206945FF00E3DD30 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAA8AF206945FF00E3DD30 /* HomeViewController.swift */; };
+		07CAA8B22069464A00E3DD30 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAA8B12069464A00E3DD30 /* User.swift */; };
+		07CAA8B420694BCB00E3DD30 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAA8B320694BCB00E3DD30 /* UserService.swift */; };
+		07CAA8B72069510A00E3DD30 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAA8B62069510A00E3DD30 /* GraphViewController.swift */; };
+		07CAA8BA2069521F00E3DD30 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAA8B92069521F00E3DD30 /* ProfileViewController.swift */; };
+		07CAA8BD2069523400E3DD30 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAA8BC2069523400E3DD30 /* MessageViewController.swift */; };
 		07D265AF2059B7730064D652 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07D265AE2059B7730064D652 /* GoogleService-Info.plist */; };
 		07E271C42059B1DE007F0592 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E271C32059B1DE007F0592 /* AppDelegate.swift */; };
 		07E271C62059B1DE007F0592 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E271C52059B1DE007F0592 /* LoginViewController.swift */; };
@@ -24,6 +30,12 @@
 		0763FECC205C30D500A0EF72 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		0763FECE205C311C00A0EF72 /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
 		0763FED1205C326600A0EF72 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		07CAA8AF206945FF00E3DD30 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		07CAA8B12069464A00E3DD30 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		07CAA8B320694BCB00E3DD30 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		07CAA8B62069510A00E3DD30 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		07CAA8B92069521F00E3DD30 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		07CAA8BC2069523400E3DD30 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		07D265AE2059B7730064D652 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		07E271C02059B1DE007F0592 /* HoneyPot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoneyPot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07E271C32059B1DE007F0592 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,8 +82,57 @@
 			isa = PBXGroup;
 			children = (
 				0763FED1205C326600A0EF72 /* AuthService.swift */,
+				07CAA8B320694BCB00E3DD30 /* UserService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		07CAA8AB206944FD00E3DD30 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				07E271C52059B1DE007F0592 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		07CAA8AD206945BA00E3DD30 /* RootView */ = {
+			isa = PBXGroup;
+			children = (
+				07CAA8AF206945FF00E3DD30 /* HomeViewController.swift */,
+			);
+			path = RootView;
+			sourceTree = "<group>";
+		};
+		07CAA8AE206945D700E3DD30 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				07CAA8B12069464A00E3DD30 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		07CAA8B5206950F000E3DD30 /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				07CAA8B62069510A00E3DD30 /* GraphViewController.swift */,
+			);
+			path = Graphs;
+			sourceTree = "<group>";
+		};
+		07CAA8B82069520500E3DD30 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				07CAA8B92069521F00E3DD30 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		07CAA8BB2069522500E3DD30 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				07CAA8BC2069523400E3DD30 /* MessageViewController.swift */,
+			);
+			path = Message;
 			sourceTree = "<group>";
 		};
 		07E271B72059B1DE007F0592 = {
@@ -95,10 +156,15 @@
 		07E271C22059B1DE007F0592 /* HoneyPot */ = {
 			isa = PBXGroup;
 			children = (
+				07CAA8BB2069522500E3DD30 /* Message */,
+				07CAA8B82069520500E3DD30 /* Profile */,
+				07CAA8B5206950F000E3DD30 /* Graphs */,
+				07CAA8AE206945D700E3DD30 /* Models */,
+				07CAA8AD206945BA00E3DD30 /* RootView */,
+				07CAA8AB206944FD00E3DD30 /* Login */,
 				0763FED0205C323500A0EF72 /* Services */,
 				0763FEC9205C307A00A0EF72 /* Extensions */,
 				07E271C32059B1DE007F0592 /* AppDelegate.swift */,
-				07E271C52059B1DE007F0592 /* LoginViewController.swift */,
 				07E271CA2059B1DE007F0592 /* Assets.xcassets */,
 				07E271CC2059B1DE007F0592 /* LaunchScreen.storyboard */,
 				07E271CF2059B1DE007F0592 /* Info.plist */,
@@ -268,10 +334,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				07E271C62059B1DE007F0592 /* LoginViewController.swift in Sources */,
+				07CAA8B72069510A00E3DD30 /* GraphViewController.swift in Sources */,
 				0763FECD205C30D500A0EF72 /* Storage.swift in Sources */,
+				07CAA8B420694BCB00E3DD30 /* UserService.swift in Sources */,
 				0763FECB205C30AC00A0EF72 /* Extensions.swift in Sources */,
 				0763FED2205C326600A0EF72 /* AuthService.swift in Sources */,
+				07CAA8BA2069521F00E3DD30 /* ProfileViewController.swift in Sources */,
+				07CAA8B22069464A00E3DD30 /* User.swift in Sources */,
 				07E271C42059B1DE007F0592 /* AppDelegate.swift in Sources */,
+				07CAA8B0206945FF00E3DD30 /* HomeViewController.swift in Sources */,
+				07CAA8BD2069523400E3DD30 /* MessageViewController.swift in Sources */,
 				0763FECF205C311C00A0EF72 /* NSLayoutConstraint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
