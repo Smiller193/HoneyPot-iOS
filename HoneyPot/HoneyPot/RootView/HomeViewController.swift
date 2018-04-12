@@ -17,7 +17,9 @@ class HomeViewController: UITabBarController {
         let graphNavController = UINavigationController(rootViewController: graph)
         graphNavController.tabBarItem.image = UIImage(named: "icons8-combo-chart-50")?.withRenderingMode(.alwaysOriginal)
         graphNavController.tabBarItem.selectedImage = UIImage(named: "icons8-combo-chart-filled-50")?.withRenderingMode(.alwaysOriginal)
-        
+        graphNavController.tabBarItem.title = "Graphs"
+
+
         //        let navController = ScrollingNavigationController(rootViewController: homeFeedController)
         
         
@@ -25,12 +27,17 @@ class HomeViewController: UITabBarController {
         let profileViewNavController = UINavigationController(rootViewController: profileView)
         profileViewNavController.tabBarItem.image = UIImage(named: "icons8-user-50")?.withRenderingMode(.alwaysOriginal)
         profileViewNavController.tabBarItem.selectedImage = UIImage(named: "icons8-user-filled-50")?.withRenderingMode(.alwaysOriginal)
+        profileViewNavController.tabBarItem.title = "Profile"
+
         
-        let messages = MessageViewController()
+        
+        let messages = MessageViewController(collectionViewLayout: UICollectionViewFlowLayout())
         let messagesNavController = UINavigationController(rootViewController: messages)
         
         messagesNavController.tabBarItem.image =  UIImage(named: "icons8-new-post-50")?.withRenderingMode(.alwaysOriginal)
         messagesNavController.tabBarItem.selectedImage =  UIImage(named: "icons8-new-post-filled-50")?.withRenderingMode(.alwaysOriginal)
+        messagesNavController.tabBarItem.title = "Chats"
+
 
         
         return [graphNavController,profileViewNavController,messagesNavController]
@@ -42,6 +49,8 @@ class HomeViewController: UITabBarController {
         SVProgressHUD.dismiss()
         
         viewControllers = viewControllerList
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.rgb(red: 250, green: 191, blue: 18)], for:.normal)
+        
         guard let items = tabBar.items else {
             return
         }

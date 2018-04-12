@@ -1,35 +1,35 @@
 //
-//  ProfileViewController.swift
+//  ChatViewController.swift
 //  HoneyPot
 //
-//  Created by Shawn Miller on 3/26/18.
+//  Created by Shawn Miller on 4/11/18.
 //  Copyright © 2018 HoneyPot. All rights reserved.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-
+class ChatViewController: UIViewController {
+    var chat: Chat!
+ lazy var dismissButton = UIBarButtonItem(image: UIImage(named: "icons8-delete-filled-50"), style: .plain, target: self, action: #selector(GoBack))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Profile"
-        view.addSubview(logoImageView)
+        setupViews()
         // Do any additional setup after loading the view.
     }
-
+    @objc func setupViews(){
+        self.navigationItem.leftBarButtonItem = dismissButton
+        view.backgroundColor = .red
+    }
+    @objc func GoBack(){
+        print("BACK TAPPED")
+        self.navigationController?.popViewController(animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    public var logoImageView: UIImageView = {
-        let firstImage = UIImageView()
-        firstImage.clipsToBounds = true
-        firstImage.image = UIImage(named: "honeyPot")?.withRenderingMode(.alwaysOriginal)
-        firstImage.translatesAutoresizingMaskIntoConstraints = false
-        firstImage.contentMode = .scaleAspectFit
-        return firstImage
-    }()
 
     /*
     // MARK: - Navigation
