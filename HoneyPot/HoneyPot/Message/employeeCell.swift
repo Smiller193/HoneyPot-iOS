@@ -13,7 +13,7 @@ class employeeCell: BaseCell {
         didSet{
             let imageURL = URL(string: (coworker?.profilePic)!)
             self.profileImage.af_setImage(withURL: imageURL!)
-            friendNameLabel.text = coworker?.username?.capitalized
+            friendNameLabel.text = coworker?.username.capitalized
         }
     }
     var dividerView: UIView?

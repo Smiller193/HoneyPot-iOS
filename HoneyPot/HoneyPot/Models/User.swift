@@ -12,7 +12,7 @@ import FirebaseDatabase.FIRDataSnapshot
 class User : NSObject {
     //User variables
     let uid : String
-    let username : String?
+    let username : String
     let profilePic: String?
     var isFollowed = false
     var dictValue: [String : Any] {
@@ -24,6 +24,13 @@ class User : NSObject {
         self.uid = uid
         self.username = username
         self.profilePic = profilePic
+        super.init()
+    }
+    
+    init(uid: String, username: String) {
+        self.uid = uid
+        self.username = username
+        self.profilePic = ""
         super.init()
     }
     

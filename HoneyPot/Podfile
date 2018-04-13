@@ -16,5 +16,6 @@ target 'HoneyPot' do
   pod ‘SVProgressHUD’
   pod ‘TextFieldEffects’
   pod 'SnapKit', '~> 4.0'
+  pod 'JSQMessagesViewController'
   # Pods for HoneyPot
 end

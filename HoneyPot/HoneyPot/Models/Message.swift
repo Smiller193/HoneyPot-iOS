@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import JSQMessagesViewController.JSQMessage
 
 class Message : NSObject {
     
@@ -25,14 +26,13 @@ class Message : NSObject {
             let timestamp = dict["timestamp"] as? TimeInterval,
             let userDict = dict["sender"] as? [String : Any],
             let uid = userDict["uid"] as? String,
-            let username = userDict["username"] as? String,
-            let profilePic = userDict["profilePic"] as? String
+            let username = userDict["username"] as? String
             else { return nil }
         
         self.key = snapshot.key
         self.content = content
         self.timestamp = Date(timeIntervalSince1970: timestamp)
-        self.sender = User(uid: uid, username: username, profilePic:profilePic )
+        self.sender = User(uid: uid, username: username)
     }
     init(content: String) {
         self.content = content
@@ -48,4 +48,11 @@ class Message : NSObject {
                 "content" : content,
                 "timestamp" : timestamp.timeIntervalSince1970]
     }
+    
+    lazy var jsqMessageValue: JSQMessage = {
+        return JSQMessage(senderId: self.sender.uid,
+                          senderDisplayName: self.sender.username,
+                          date: self.timestamp,
+                          text: self.content)
+    }()
 }

@@ -15,7 +15,7 @@ class ChatListCell: BaseCell {
         didSet{
             let imageURL = URL(string: (chatUser?.profilePic)!)
             self.profileImage.af_setImage(withURL: imageURL!)
-            friendNameLabel.text = chatUser?.username?.capitalized
+            friendNameLabel.text = chatUser?.username.capitalized
         }
     }
     var dividerView: UIView?
@@ -34,19 +34,19 @@ class ChatListCell: BaseCell {
         return profilePicture
     }()
     
-    let friendNameLabel : UILabel =  {
+    lazy var friendNameLabel : UILabel =  {
         let friendNameLabel = UILabel()
         friendNameLabel.font = UIFont(name:"Avenir-Heavy", size: 18)
         return friendNameLabel
     }()
-    let messageLabel : UILabel =  {
+    lazy var messageLabel : UILabel =  {
         let messageLabel = UILabel()
         messageLabel.text = "Your friends message and something else...."
         messageLabel.font = UIFont(name:"Avenir", size: 14)
         return messageLabel
     }()
     
-    let timeLabel : UILabel =  {
+    lazy var timeLabel : UILabel =  {
         let timeLabel = UILabel()
         timeLabel.textAlignment = .right
         timeLabel.text = "12:00 PM"

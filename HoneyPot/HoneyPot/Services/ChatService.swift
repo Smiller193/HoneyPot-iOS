@@ -84,6 +84,7 @@ struct ChatService {
     }
     
     static func observeMessages(forChatKey chatKey: String, completion: @escaping (DatabaseReference, Message?) -> Void) -> DatabaseHandle {
+        print(chatKey)
         let messagesRef = Database.database().reference().child("messages").child(chatKey)
         
         return messagesRef.observe(.childAdded, with: { snapshot in

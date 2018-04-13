@@ -43,7 +43,7 @@ class Chat: NSObject {
         
         // 2
         self.title = members.reduce("") { (acc, cur) -> String in
-            return acc.isEmpty ? cur.username! : "\(acc), \(cur.username)"
+            return acc.isEmpty ? cur.username : "\(acc)"
         }
         // 3
         self.memberHash = Chat.hash(forMembers: members)
