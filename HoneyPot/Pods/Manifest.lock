@@ -73,6 +73,7 @@ PODS:
   - SVProgressHUD (2.2.5)
   - SwiftyJSON (4.0.0)
   - TextFieldEffects (1.4.0)
+  - TwicketSegmentedControl (0.1.2)
 
 DEPENDENCIES:
   - Alamofire
@@ -88,6 +89,7 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwiftyJSON
   - TextFieldEffects
+  - TwicketSegmentedControl
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
@@ -112,7 +114,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
+  TwicketSegmentedControl: 6d7a4cf243657e0ac3f00d06d873a25334c04042
 
-PODFILE CHECKSUM: 2103049912e73f5f94919b04fdc1ef78a43ac898
+PODFILE CHECKSUM: 104915551a7d4b34d032bf8ce2db0005a08285a4
 
 COCOAPODS: 1.4.0
