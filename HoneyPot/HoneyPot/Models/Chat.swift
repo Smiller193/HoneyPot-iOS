@@ -56,8 +56,8 @@ class Chat: NSObject {
             fatalError("There must be two members to compute member hash.")
         }
         
-        let firstMember = members[0]
-        let secondMember = members[1]
+        let firstMember = members[1]
+        let secondMember = members[0]
         
         let memberHash = String(firstMember.uid.hashValue ^ secondMember.uid.hashValue)
         return memberHash

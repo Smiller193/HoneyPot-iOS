@@ -7,43 +7,105 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireNetworkActivityIndicator
+import SwiftyJSON
 
-class GraphViewController: UIViewController {
 
+class GraphViewController: UITableViewController {
+    var cellID = "cellID"
+    var Attacks = [AttackArray]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Attack Graphs"
-        view.addSubview(logoImageView)
-        view.addSubview(logoImageView2)
-        logoImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: nil, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        logoImageView2.anchor(top: logoImageView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        setupVC()
         // Do any additional setup after loading the view.
     }
+    var isFinishedPaging: Bool = false
+    
+    @objc func setupVC(){
+        navigationItem.title = "Home"
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.register(AttackTableViewCell.self, forCellReuseIdentifier: cellID)
+        let mapButton = UIBarButtonItem(image: UIImage(named: "icons8-map-48"), style: .plain, target: self, action: #selector(presentMap))
+        self.navigationItem.leftBarButtonItem = mapButton
+        let graphButton = UIBarButtonItem(image: UIImage(named: "icons8-combo-chart-50"), style: .plain, target: self, action: #selector(presentGraphs))
+        self.navigationItem.rightBarButtonItem = graphButton
+        paginatePost()
 
+    }
+    
+    @objc func presentMap(){
+        print("Button pressed")
+    }
+    
+    @objc func presentGraphs(){
+        
+    }
+    @objc func paginatePost(){
+        AtackService.fetchUserAttack(for: "", currentAttackCount: 0, isFinishedPaging: isFinishedPaging) { (Attack, pagingResult) in
+            print("tried it")
+            var AttacksArray = AttackArray(attackNumber: Attack.key!, attack: Attack)
+            self.isFinishedPaging = pagingResult
+            self.Attacks.append(AttacksArray)
+            self.tableView.reloadData()
+        }
+    }
+    
+    @objc func paginatePostWithKey(lastKey: String, attackCount: Int, isFinishedPaging: Bool){
+        AtackService.fetchUserAttack(for: lastKey, currentAttackCount: attackCount, isFinishedPaging: isFinishedPaging) { (Attack, pagingResult) in
+            print("tried it")
+            var AttacksArray = AttackArray(attackNumber: Attack.key!, attack: Attack)
+            self.isFinishedPaging = pagingResult
+            self.Attacks.append(AttacksArray)
+            self.tableView.reloadData()
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! AttackTableViewCell? ?? AttackTableViewCell(style: .default, reuseIdentifier: cellID)
+        cell.attack = Attacks[indexPath.section].attack
+        cell.backgroundColor =  .clear
+        return cell
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return Attacks.count
+    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Attacks[section].collapsed ? 0 : 1
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == self.Attacks.count - 1 && !isFinishedPaging{
+            print("Paginating for post")
+            paginatePostWithKey(lastKey: (Attacks.last?.attack.key)!, attackCount: Attacks.count, isFinishedPaging: isFinishedPaging)
+            
+        }
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? CollapsibleTableViewHeader ?? CollapsibleTableViewHeader(reuseIdentifier: "header")
+        header.setCollapsed(Attacks[section].collapsed)
+        header.arrowLabel.text = ">"
+        header.section = section
+        header.delegate = self
+        header.attackDetails = Attacks[section]
+        return header
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
 
-    public var logoImageView: UIImageView = {
-        let firstImage = UIImageView()
-        firstImage.clipsToBounds = true
-        firstImage.image = UIImage(named: "groupedbarchart")?.withRenderingMode(.alwaysOriginal)
-        firstImage.translatesAutoresizingMaskIntoConstraints = false
-        firstImage.contentMode = .scaleAspectFit
-        return firstImage
-    }()
-    
-    
-    public var logoImageView2: UIImageView = {
-        let firstImage = UIImageView()
-        firstImage.clipsToBounds = true
-        firstImage.image = UIImage(named: "images")?.withRenderingMode(.alwaysOriginal)
-        firstImage.translatesAutoresizingMaskIntoConstraints = false
-        firstImage.contentMode = .scaleAspectFit
-        return firstImage
-    }()
+
     /*
     // MARK: - Navigation
 
@@ -54,4 +116,15 @@ class GraphViewController: UIViewController {
     }
     */
 
+}
+
+extension GraphViewController: CollapsibleTableViewHeaderDelegate {
+    func toggleSection(_ header: CollapsibleTableViewHeader, section: Int) {
+        let collapsed = !Attacks[section].collapsed
+        // Toggle collapse
+        Attacks[section].collapsed = collapsed
+        header.setCollapsed(collapsed)
+        // Reload the whole section
+        tableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)
+    }
 }

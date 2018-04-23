@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = UIColor.white
         configureInitialRootViewController(for: window)
+//        GMSServices.provideAPIKey("AIzaSyB88ZXgUfRZ82m_R5_sIixIoTNxtTtX0MI")
+//        GMSPlacesClient.provideAPIKey("AIzaSyB88ZXgUfRZ82m_R5_sIixIoTNxtTtX0MI")
         // Override point for customization after application launch.
         return true
     }

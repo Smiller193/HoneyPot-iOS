@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		072D2E2F208D4A5300B10742 /* Attack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072D2E2E208D4A5300B10742 /* Attack.swift */; };
 		0763FECB205C30AC00A0EF72 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763FECA205C30AC00A0EF72 /* Extensions.swift */; };
 		0763FECD205C30D500A0EF72 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763FECC205C30D500A0EF72 /* Storage.swift */; };
 		0763FECF205C311C00A0EF72 /* NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763FECE205C311C00A0EF72 /* NSLayoutConstraint.swift */; };
 		0763FED2205C326600A0EF72 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0763FED1205C326600A0EF72 /* AuthService.swift */; };
+		0775536A208DEF6900A105FA /* AttackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07755369208DEF6900A105FA /* AttackService.swift */; };
+		0775536C208E0B4200A105FA /* AttackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0775536B208E0B4200A105FA /* AttackTableViewCell.swift */; };
+		0775536E208E117E00A105FA /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0775536D208E117E00A105FA /* CollapsibleTableViewHeader.swift */; };
+		07755370208E167800A105FA /* AttackArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0775536F208E167800A105FA /* AttackArray.swift */; };
 		078D1ECB207BD1B700EC535F /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078D1ECA207BD1B700EC535F /* Chat.swift */; };
 		078D1ECD207BD22F00EC535F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078D1ECC207BD22F00EC535F /* Message.swift */; };
 		078D1ECF207BD67F00EC535F /* CustomImageVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078D1ECE207BD67F00EC535F /* CustomImageVIew.swift */; };
@@ -35,10 +40,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		072D2E2E208D4A5300B10742 /* Attack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attack.swift; sourceTree = "<group>"; };
 		0763FECA205C30AC00A0EF72 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0763FECC205C30D500A0EF72 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		0763FECE205C311C00A0EF72 /* NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraint.swift; sourceTree = "<group>"; };
 		0763FED1205C326600A0EF72 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		07755369208DEF6900A105FA /* AttackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackService.swift; sourceTree = "<group>"; };
+		0775536B208E0B4200A105FA /* AttackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackTableViewCell.swift; sourceTree = "<group>"; };
+		0775536D208E117E00A105FA /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
+		0775536F208E167800A105FA /* AttackArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackArray.swift; sourceTree = "<group>"; };
 		078D1ECA207BD1B700EC535F /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		078D1ECC207BD22F00EC535F /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		078D1ECE207BD67F00EC535F /* CustomImageVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageVIew.swift; sourceTree = "<group>"; };
@@ -103,6 +113,7 @@
 				0763FED1205C326600A0EF72 /* AuthService.swift */,
 				07CAA8B320694BCB00E3DD30 /* UserService.swift */,
 				078D1ED2207BD81900EC535F /* ChatService.swift */,
+				07755369208DEF6900A105FA /* AttackService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -129,6 +140,8 @@
 				07CAA8B12069464A00E3DD30 /* User.swift */,
 				078D1ECA207BD1B700EC535F /* Chat.swift */,
 				078D1ECC207BD22F00EC535F /* Message.swift */,
+				072D2E2E208D4A5300B10742 /* Attack.swift */,
+				0775536F208E167800A105FA /* AttackArray.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -137,6 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				07CAA8B62069510A00E3DD30 /* GraphViewController.swift */,
+				0775536B208E0B4200A105FA /* AttackTableViewCell.swift */,
+				0775536D208E117E00A105FA /* CollapsibleTableViewHeader.swift */,
 			);
 			path = Graphs;
 			sourceTree = "<group>";
@@ -290,8 +305,10 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityIndicator/AlamofireNetworkActivityIndicator.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -308,8 +325,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityIndicator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -332,9 +351,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HoneyPot/Pods-HoneyPot-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -371,22 +395,27 @@
 				078D1ECF207BD67F00EC535F /* CustomImageVIew.swift in Sources */,
 				07CAA8B72069510A00E3DD30 /* GraphViewController.swift in Sources */,
 				07ABC03F207E7DDC00C4D28E /* BaseCell.swift in Sources */,
+				0775536E208E117E00A105FA /* CollapsibleTableViewHeader.swift in Sources */,
 				078D1ED1207BD76800EC535F /* MessageViewController.swift in Sources */,
 				0763FECD205C30D500A0EF72 /* Storage.swift in Sources */,
+				0775536A208DEF6900A105FA /* AttackService.swift in Sources */,
 				07CAA8B420694BCB00E3DD30 /* UserService.swift in Sources */,
 				0763FECB205C30AC00A0EF72 /* Extensions.swift in Sources */,
 				0763FED2205C326600A0EF72 /* AuthService.swift in Sources */,
 				07ABC045207EB15B00C4D28E /* ChatViewController.swift in Sources */,
+				07755370208E167800A105FA /* AttackArray.swift in Sources */,
 				07CAA8BA2069521F00E3DD30 /* ProfileViewController.swift in Sources */,
 				07CAA8B22069464A00E3DD30 /* User.swift in Sources */,
 				07E271C42059B1DE007F0592 /* AppDelegate.swift in Sources */,
 				07CAA8B0206945FF00E3DD30 /* HomeViewController.swift in Sources */,
+				072D2E2F208D4A5300B10742 /* Attack.swift in Sources */,
 				078D1ED3207BD81900EC535F /* ChatService.swift in Sources */,
 				07ABC041207EA23100C4D28E /* employeeCell.swift in Sources */,
 				07ABC03D207E7A8E00C4D28E /* ChatListCell.swift in Sources */,
 				0763FECF205C311C00A0EF72 /* NSLayoutConstraint.swift in Sources */,
 				078D1ECD207BD22F00EC535F /* Message.swift in Sources */,
 				07ABC043207EA25200C4D28E /* NewChatViewController.swift in Sources */,
+				0775536C208E0B4200A105FA /* AttackTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

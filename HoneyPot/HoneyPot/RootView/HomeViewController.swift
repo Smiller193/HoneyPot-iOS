@@ -15,10 +15,9 @@ class HomeViewController: UITabBarController {
     lazy var viewControllerList: [UIViewController] = {
         let graph = GraphViewController()
         let graphNavController = UINavigationController(rootViewController: graph)
-        graphNavController.tabBarItem.image = UIImage(named: "icons8-combo-chart-50")?.withRenderingMode(.alwaysOriginal)
-        graphNavController.tabBarItem.selectedImage = UIImage(named: "icons8-combo-chart-filled-50")?.withRenderingMode(.alwaysOriginal)
-        graphNavController.tabBarItem.title = "Graphs"
-
+        graphNavController.tabBarItem.image = UIImage(named: "icons8-home-page-50 (1)")?.withRenderingMode(.alwaysOriginal)
+        graphNavController.tabBarItem.selectedImage = UIImage(named: "iicons8-home-page-filled-50 (1)")?.withRenderingMode(.alwaysOriginal)
+        graphNavController.tabBarItem.title = "Home"
 
         //        let navController = ScrollingNavigationController(rootViewController: homeFeedController)
         
@@ -40,7 +39,7 @@ class HomeViewController: UITabBarController {
 
 
         
-        return [graphNavController,profileViewNavController,messagesNavController]
+        return [graphNavController,messagesNavController]
     }()
     
 

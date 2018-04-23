@@ -22,7 +22,7 @@ class employeeCell: BaseCell {
         let profilePicture = CustomImageView()
         profilePicture.clipsToBounds = true
         profilePicture.translatesAutoresizingMaskIntoConstraints = false
-        profilePicture.contentMode = .scaleToFill
+        profilePicture.contentMode = .scaleAspectFit
         profilePicture.isUserInteractionEnabled = true
         profilePicture.layer.shouldRasterize = true
         //        profilePicture.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))

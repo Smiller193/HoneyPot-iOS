@@ -10,7 +10,7 @@ target 'HoneyPot' do
   pod 'Firebase/Storage’
   pod 'Firebase/Messaging’
   pod ’SwiftyJSON’
-  pod 'Alamofire'
+  pod 'Alamofire', '~> 4.7'
   pod 'AlamofireImage'
   pod 'AlamofireNetworkActivityIndicator'
   pod ‘SVProgressHUD’
@@ -18,5 +18,9 @@ target 'HoneyPot' do
   pod 'SnapKit', '~> 4.0'
   pod 'JSQMessagesViewController'
   pod 'TwicketSegmentedControl'
+  pod 'Charts'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+  pod 'IGListKit', :git => 'https://github.com/Instagram/IGListKit.git', :branch => 'master'
   # Pods for HoneyPot
 end
