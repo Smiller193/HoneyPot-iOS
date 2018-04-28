@@ -8,33 +8,62 @@
 
 import UIKit
 
+
 class AttackTableViewCell: UITableViewCell {
     var stackView: UIStackView?
+    var stackView2: UIStackView?
+
+    var urlContents = ""
+    var navTitle = ""
+
     var attack : Attack? {
         didSet{
+            stackView?.removeFromSuperview()
+            stackView2?.removeFromSuperview()
             guard let currentAttack = attack else {
                 return
             }
-            attackerID.text = "AttackerID: \(String(describing: currentAttack.attackerID!))"
-            ipAddress.text = "AttackerIpAddress:\(String(describing: currentAttack.ipAddress!))"
-            username.text = "AttackerUsername:\(String(describing: currentAttack.username!))"
-            passwords.text = "AttackerPasswords:\(String(describing: currentAttack.passwords!))"
-            timeOfDayAcessed.text = "TimeAccessedByAttacker:\(String(describing: currentAttack.timeOfDayAcessed!))"
-            logFile.text = "LogFile:\(String(describing: currentAttack.logFile!))"
-            sessions.text = "sessions:\(String(describing: currentAttack.sessions!))"
-            country.text = "AttackeCountry:\(String(describing: currentAttack.country!))"
-            city.text = "AttackerCity:\(String(describing: currentAttack.city!))"
-            state.text = "AttackerState:\(String(describing: currentAttack.state!))"
-            loggedIn.text = "LoggedIn:\(String(describing: currentAttack.loggedIn!))"
-            uploadFiles.text = "uploadFiles:\(String(describing: currentAttack.uploadFiles!))"
-            dateAccessed.text = "dateAccessed:\(String(describing: currentAttack.dateAccessed!))"
-            longitude.text = "longitude:\(String(describing: currentAttack.longitude!))"
-            latitude.text = "latitude:\(String(describing: currentAttack.latitude!))"
-            errorMsg.text = "errorMsg:\(String(describing: currentAttack.errorMsg!))"
+            if let attackerID = currentAttack.attackerID, let ipAddy = currentAttack.ip_address,
+                let userName = currentAttack.ip_address, let passWords = currentAttack.passwords,
+            let timeOfDay = currentAttack.time_of_day_accessed, let logfile = currentAttack.logFile,
+                let sessions = currentAttack.sessions, let country = currentAttack.country,let city = currentAttack.city,let state = currentAttack.state,let dateAccessed = currentAttack.dateAccessed,let long = currentAttack.longitude, let lat = currentAttack.latitude{
+                attackerIDLabel.text = "Attacker ID: \(attackerID)"
+                ipAddress.text = "Attacker IpAddress:\(ipAddy)"
+                username.text = "Attacker Username:\(userName))"
+                passwords.text = "Attacker Passwords:\(passWords)"
+                timeOfDayAcessed.text = "Time Accessed By Attacker:\(timeOfDay)"
+                logFile.text = "Log File:\(logfile)"
+                sessionsLabel.text = "sessions:\(sessions)"
+                countryLabel.text = "Attacke Country:\(country)"
+                cityLabel.text = "Attacker City:\(city)"
+                stateLabel.text = "Attacker State:\(state)"
+                dateAccessedLabel.text = "Date Accessed:\(dateAccessed)"
+                longitude.text = "longitude:\(long)"
+                latitude.text = "latitude:\(lat)"
+                setupCell()
+            }
+            if currentAttack.attackerID == nil {
+                if let city = currentAttack.city, let country = currentAttack.country, let dateAccessed = currentAttack.dateAccessed,let ipAddy = currentAttack.ip_address, let logFIle = currentAttack.logFile, let passwords2 = currentAttack.passwords, let state = currentAttack.state,let timeOfDay = currentAttack.time_of_day_accessed, let username1 = currentAttack.username{
+                    cityLabel.text = "City:\(city)"
+                    countryLabel.text = "Country:\(country)"
+                    dateAccessedLabel.text = "Date Accessed:\(dateAccessed)"
+                    ipAddress.text = "IpAddress:\(ipAddy)"
+                    logFile.text = "Log File:\(logFIle)"
+                    passwords.text = "Passwords:\(passwords2)"
+                    stateLabel.text = "State:\(state)"
+                    timeOfDayAcessed.text = "Time Accessed:\(timeOfDay)"
+                    username.text = "Username:\(username1))"
+                    setupCell2()
+                }
+            }
+
+
         }
     }
     
-    let attackerID:UILabel={
+    var graphViewController:GraphViewController?
+    
+    let attackerIDLabel:UILabel={
         let label = UILabel()
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +111,9 @@ class AttackTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         return label
     }()
-    let sessions:UILabel={
+    
+ 
+    let sessionsLabel:UILabel={
         let label = UILabel()
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +121,7 @@ class AttackTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         return label
     }()
-    let country:UILabel={
+    let countryLabel:UILabel={
         let label = UILabel()
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +129,7 @@ class AttackTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         return label
     }()
-    let city:UILabel={
+    let cityLabel:UILabel={
         let label = UILabel()
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -106,7 +137,7 @@ class AttackTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         return label
     }()
-    let state:UILabel={
+    let stateLabel:UILabel={
         let label = UILabel()
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -114,23 +145,7 @@ class AttackTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         return label
     }()
-    let loggedIn:UILabel={
-        let label = UILabel()
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 13.5)
-        label.numberOfLines = 0
-        return label
-    }()
-    let uploadFiles:UILabel={
-        let label = UILabel()
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 13.5)
-        label.numberOfLines = 0
-        return label
-    }()
-    let dateAccessed:UILabel={
+    let dateAccessedLabel:UILabel={
         let label = UILabel()
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -154,32 +169,90 @@ class AttackTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         return label
     }()
-    let errorMsg:UILabel={
-        let label = UILabel()
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 13.5)
-        label.numberOfLines = 0
-        return label
-    }()
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupCell()
+       
 
     }
     @objc func setupCell() {
-        stackView = UIStackView(arrangedSubviews: [attackerID,ipAddress,username,passwords,timeOfDayAcessed,logFile,sessions,country,city,state,loggedIn,uploadFiles,dateAccessed,longitude,latitude,errorMsg])
+        stackView = UIStackView(arrangedSubviews: [attackerIDLabel,ipAddress,username,passwords,timeOfDayAcessed,logFile,sessionsLabel,countryLabel,cityLabel,stateLabel,dateAccessedLabel,longitude,latitude])
         stackView?.distribution = .fillEqually
         stackView?.axis = .vertical
-        stackView?.spacing = 5.0
         addSubview(stackView!)
         stackView?.snp.makeConstraints({ (make) in
             make.edges.equalTo(self).inset(3)
         })
+        self.logFile.isUserInteractionEnabled = true
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(showLogFiles))
+        self.logFile.addGestureRecognizer(recognizer)
+    }
+    
+    @objc func setupCell2(){
+        print("setting up cells")
+        stackView2 = UIStackView(arrangedSubviews: [cityLabel,countryLabel,dateAccessedLabel,ipAddress,logFile,passwords,stateLabel,timeOfDayAcessed,username])
+        stackView2?.distribution = .fillEqually
+        stackView2?.axis = .vertical
+        stackView2?.spacing = 5.0
+        addSubview(stackView2!)
+        stackView2?.snp.makeConstraints({ (make) in
+            make.edges.equalTo(self).inset(3)
+        })
+        self.logFile.isUserInteractionEnabled = true
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(showLogFiles))
+        self.logFile.addGestureRecognizer(recognizer)
+    }
+    
+    @objc func showLogFiles(){
+        print("logfile has been tapped")
+        print(logFile.text!)
+        let logFileTextPath = logFile.text?.components(separatedBy: ":")
+        print(logFileTextPath![1])
+        self.navTitle = logFileTextPath![1]
+        var urlString = "http://18.218.88.192:8080/ActiveHoneypotWeb/logfiles/\(logFileTextPath![1])"
+        grabTextFile(urlString: urlString, navTitle: logFileTextPath![1])
+    }
+    
+    @objc func grabTextFile(urlString: String, navTitle: String){
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
+
+        if let messageURL = URL(string: urlString) {
+            let sharedSession = URLSession.shared
+            let downloadTask = sharedSession.downloadTask(with: messageURL) { (location, response, error) in
+                if let location = location {
+                    do{
+                        self.urlContents = try String(contentsOf: location, encoding: String.Encoding.utf8)
+                        dispatchGroup.leave()
+                    }catch {
+                        print("Couldn't load string from \(location)")
+                    }
+                } else if let error = error {
+                    print("Unable to load data: \(error)")
+                }
+            }
+            downloadTask.resume()
+        } else {
+            print("\(urlString) isn't a valid URL")
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            print(self.urlContents)
+            self.presentVc(navTitle: self.navTitle, urlContents: self.urlContents)
+        }
+        
+    }
+    
+    @objc func presentVc(navTitle: String, urlContents: String){
+        let logFileVC = LogFileViewController()
+        print(urlContents)
+        logFileVC.navigationItem.title = navTitle
+        logFileVC.textView.text = urlContents
+        print(self.urlContents)
+        self.graphViewController?.navigationController?.pushViewController(logFileVC, animated: false)
     }
     
     required init?(coder aDecoder: NSCoder) {

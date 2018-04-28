@@ -14,16 +14,19 @@ class User : NSObject {
     let uid : String
     let username : String
     let profilePic: String?
+    let company: String?
     var isFollowed = false
     var dictValue: [String : Any] {
         return ["username" : username as Any,
-                "profilePic" : profilePic as Any]
+                "profilePic" : profilePic as Any,
+                "company":company as Any]
     }
     //Standard User init()
-    init(uid: String, username: String, profilePic: String) {
+    init(uid: String, username: String, profilePic: String,company: String) {
         self.uid = uid
         self.username = username
         self.profilePic = profilePic
+        self.company = company
         super.init()
     }
     
@@ -31,6 +34,7 @@ class User : NSObject {
         self.uid = uid
         self.username = username
         self.profilePic = ""
+        self.company = ""
         super.init()
     }
     
@@ -41,7 +45,9 @@ class User : NSObject {
         print(dict)
         let profilePic = dict["profilePic"] as? String ?? ""
         let username = dict["username"] as? String ?? ""
+        let company = dict["company"] as? String ?? ""
         self.uid = key
+        self.company = company
         self.profilePic = profilePic
         self.username = username
     }
@@ -49,20 +55,25 @@ class User : NSObject {
     init?(snapshot: DataSnapshot) {
         guard let dict = snapshot.value as? [String : Any],
             let username = dict["username"] as? String,
-            let profilePic = dict["profilePic"] as? String
+            let profilePic = dict["profilePic"] as? String,
+        let company = dict["company"] as? String
             else { return nil }
         self.uid = snapshot.key
         self.username = username
         self.profilePic = profilePic
+        self.company = company
     }
     //UserDefaults
     required init?(coder aDecoder: NSCoder) {
         guard let uid = aDecoder.decodeObject(forKey: "uid") as? String,
             let username = aDecoder.decodeObject(forKey: "username") as? String,
-            let profilePic = aDecoder.decodeObject(forKey: "profilePic") as? String            else { return nil }
+            let profilePic = aDecoder.decodeObject(forKey: "profilePic") as? String,
+         let company = aDecoder.decodeObject(forKey: "company") as? String
+        else { return nil }
         self.uid = uid
         self.username = username
         self.profilePic = profilePic
+        self.company = company
         super.init()
     }
     
@@ -94,5 +105,7 @@ extension User: NSCoding {
         aCoder.encode(uid, forKey: "uid")
         aCoder.encode(username, forKey: "username")
         aCoder.encode(profilePic, forKey: "profilePic")
+        aCoder.encode(company, forKey: "company")
+
     }
 }

@@ -10,11 +10,14 @@ import UIKit
 import Alamofire
 import AlamofireNetworkActivityIndicator
 import SwiftyJSON
+import Firebase
 
 
 class GraphViewController: UITableViewController {
     var cellID = "cellID"
     var Attacks = [AttackArray]()
+    var attackRef: DatabaseReference?
+    var attackHandle: DatabaseHandle = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
@@ -33,8 +36,10 @@ class GraphViewController: UITableViewController {
         let graphButton = UIBarButtonItem(image: UIImage(named: "icons8-combo-chart-50"), style: .plain, target: self, action: #selector(presentGraphs))
         self.navigationItem.rightBarButtonItem = graphButton
         paginatePost()
+        observeAttacks()
 
     }
+
     
     @objc func presentMap(){
         print("Button pressed")
@@ -43,13 +48,23 @@ class GraphViewController: UITableViewController {
     @objc func presentGraphs(){
         
     }
+    
+    @objc func observeAttacks(){
+       attackHandle = AtackService.observeAttacks { (ref, Attack) in
+            self.attackRef = ref
+        var AttacksArray = AttackArray(attackNumber: (Attack?.key)!, attack: Attack!)
+        self.Attacks.append(AttacksArray)
+        self.tableView.reloadData()
+        }
+        
+    }
     @objc func paginatePost(){
         AtackService.fetchUserAttack(for: "", currentAttackCount: 0, isFinishedPaging: isFinishedPaging) { (Attack, pagingResult) in
             print("tried it")
             var AttacksArray = AttackArray(attackNumber: Attack.key!, attack: Attack)
             self.isFinishedPaging = pagingResult
-            self.Attacks.append(AttacksArray)
-            self.tableView.reloadData()
+//            self.Attacks.append(AttacksArray)
+//            self.tableView.reloadData()
         }
     }
     
@@ -69,6 +84,7 @@ class GraphViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! AttackTableViewCell? ?? AttackTableViewCell(style: .default, reuseIdentifier: cellID)
+        cell.graphViewController = self
         cell.attack = Attacks[indexPath.section].attack
         cell.backgroundColor =  .clear
         return cell
@@ -104,18 +120,6 @@ class GraphViewController: UITableViewController {
         return 50
     }
     
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension GraphViewController: CollapsibleTableViewHeaderDelegate {

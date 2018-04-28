@@ -26,10 +26,13 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     }()
     var attackDetails: AttackArray?{
         didSet {
-            var name = "N/A"
-            if let value = attackDetails?.attack {
-                name = value.key!
-                attackLabel.text = "Attack \(String(Int(name)! + 1))"
+            var name = 0
+            if let value = attackDetails?.attack.attackerID {
+                name = value
+                attackLabel.text = "Attack"
+            }else{
+                attackLabel.text = "Attack"
+
             }
         }
     }

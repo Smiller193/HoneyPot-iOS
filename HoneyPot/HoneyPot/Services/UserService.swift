@@ -145,7 +145,7 @@ struct UserService {
     
     static func following(for user: User = User.current, completion: @escaping ([User]) -> Void) {
         // 1
-        let followingRef = Database.database().reference().child("company").child("msft").child("employees")
+        let followingRef = Database.database().reference().child("company").child(user.company!).child("employees")
         followingRef.observeSingleEvent(of: .value, with: { (snapshot) in
             // 2
             guard let followingDict = snapshot.value as? [String : Bool] else {

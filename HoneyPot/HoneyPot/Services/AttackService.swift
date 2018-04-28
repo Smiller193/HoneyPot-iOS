@@ -13,13 +13,13 @@ struct AtackService {
     //will grab all user notifications for database
     static func fetchUserAttack(for lastKey: String,currentAttackCount: Int, isFinishedPaging: Bool,withCompletion completion: @escaping ( Attack,Bool) -> Void){
         var pagingDone = isFinishedPaging
-        let attackRef = Database.database().reference().child("recordList")
+        let attackRef = Database.database().reference().child("attacks")
         let value = lastKey
         var query = attackRef.queryOrderedByKey()
         if currentAttackCount > 0 {
             query = query.queryStarting(atValue: value)
         }
-        query.queryLimited(toFirst: 14).observeSingleEvent(of: .value, with: { (snapshot) in
+        query.queryLimited(toFirst: 6).observeSingleEvent(of: .value, with: { (snapshot) in
             guard var allObjects = snapshot.children.allObjects as? [DataSnapshot] else{
                 return
             }
@@ -32,13 +32,20 @@ struct AtackService {
             }
             
             for objects in allObjects {
-                print(objects.key)
-                guard let attack = Attack(snapshot: objects) else {
-                    return
+                if objects.childrenCount == 13 {
+                    print(objects.key)
+                    guard let attack = Attack(snapshot: objects) else {
+                        return
+                    }
+                    completion(attack,pagingDone)
                 }
-                completion(attack,pagingDone)
+                if objects.childrenCount == 9 {
+                    guard let attack = Attack(invalidLoginSnapshot: objects) else {
+                        return
+                    }
+                    completion(attack,pagingDone)
+                }
             }
-  
             
         }) { (err) in
             print(err)
@@ -46,4 +53,27 @@ struct AtackService {
         }
      
     }
+    
+    //will support real time data syncing of attacks
+    static func observeAttacks(completion: @escaping (DatabaseReference, Attack?) -> Void) -> DatabaseHandle {
+        let attackRef = Database.database().reference().child("attacks")
+        return attackRef.observe(.childAdded, with: { snapshot in
+            print(snapshot)
+            
+            if snapshot.childrenCount == 13 {
+                guard let attack = Attack(snapshot: snapshot) else {
+                    return
+                }
+                completion(attackRef,attack)
+            }
+            if snapshot.childrenCount == 9 {
+                guard let attack = Attack(invalidLoginSnapshot: snapshot) else {
+                    return
+                }
+                completion(attackRef,attack)
+            }
+            
+        })
+    }
+    
 }

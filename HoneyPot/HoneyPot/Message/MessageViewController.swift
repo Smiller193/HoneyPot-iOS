@@ -93,7 +93,9 @@ class MessageViewController: UICollectionViewController, UICollectionViewDelegat
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ChatListCell
         let chat = chats[indexPath.item]
-        UserService.show(forUID: chat.memberUIDs[0]) { (user) in
+        UserService.show(forUID: chat.memberUIDs[1]) { (user) in
+            print(chat.memberUIDs[1])
+            print(user?.username)
             cell.chatUser = user
         }
         cell.timeLabel.text = timeStringFromUnixTime(unixTime: (chat.lastMessageSent?.timeIntervalSince1970)!)
