@@ -93,11 +93,24 @@ class MessageViewController: UICollectionViewController, UICollectionViewDelegat
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ChatListCell
         let chat = chats[indexPath.item]
-        UserService.show(forUID: chat.memberUIDs[1]) { (user) in
-            print(chat.memberUIDs[1])
-            print(user?.username)
-            cell.chatUser = user
+        //if I am the sender show reciever info and pic
+        if chat.memberUIDs[0] == User.current.uid {
+            UserService.show(forUID: chat.memberUIDs[1]) { (user) in
+                print(chat.memberUIDs[1])
+                print(user?.username)
+                cell.chatUser = user
+            }
         }
+        // if I am reciever show sender info and pic
+        if chat.memberUIDs[1] == User.current.uid {
+            UserService.show(forUID: chat.memberUIDs[0]) { (user) in
+                print(chat.memberUIDs[0])
+                print(user?.username)
+                cell.chatUser = user
+            }
+        }
+        
+
         cell.timeLabel.text = timeStringFromUnixTime(unixTime: (chat.lastMessageSent?.timeIntervalSince1970)!)
         cell.messageLabel.text = chat.lastMessage
         return cell

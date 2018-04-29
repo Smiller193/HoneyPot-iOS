@@ -11,7 +11,7 @@ import Firebase
 
 struct ChatService {
     static func create(from message: Message, with chat: Chat, completion: @escaping (Chat?) -> Void) {
-        
+        print(chat)
         // 1
         var membersDict = [String : Bool]()
         for uid in chat.memberUIDs {

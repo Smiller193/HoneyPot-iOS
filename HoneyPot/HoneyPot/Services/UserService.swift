@@ -160,10 +160,11 @@ struct UserService {
                 dispatchGroup.enter()
                 
                 show(forUID: uid) { user in
-                    if let user = user {
-                        following.append(user)
+                    if user?.uid != User.current.uid{
+                        if let user = user {
+                            following.append(user)
+                        }
                     }
-                    
                     dispatchGroup.leave()
                 }
             }

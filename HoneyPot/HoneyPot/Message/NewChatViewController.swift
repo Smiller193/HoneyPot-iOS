@@ -43,7 +43,7 @@ class NewChatViewController: UICollectionViewController,UICollectionViewDelegate
         ChatService.checkForExistingChat(with: selectedUser) { (chat) in
             sender.isEnabled = true
             self.existingChat = chat
-            let members = [selectedUser, User.current]
+            let members = [User.current, selectedUser]
             let chatVC = ChatViewController()
             chatVC.chat = self.existingChat ?? Chat(members: members)
             self.navigationController?.pushViewController(chatVC, animated: true)
