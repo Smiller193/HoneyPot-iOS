@@ -64,7 +64,6 @@ class ChatViewController: JSQMessagesViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
-        tabBarController?.tabBar.items?[1].badgeValue = nil
         self.x = 0
 
     }
@@ -74,7 +73,6 @@ class ChatViewController: JSQMessagesViewController {
         
         messagesHandle = ChatService.observeMessages(forChatKey: chatKey, completion: { [weak self] (ref, message) in
             self?.x+=1
-            self?.tabBarController?.tabBar.items?[1].badgeValue = String(describing: self?.x)
             self?.messagesRef = ref
             
             if let message = message {
