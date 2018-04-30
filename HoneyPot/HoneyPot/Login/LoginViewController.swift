@@ -54,6 +54,7 @@ class LoginViewController: UIViewController {
         
         logoImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: nil, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 150, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         setupStackView()
+        NotificationCenter.default.post(name: heartAttackNotificationName, object: nil)
 
     }
     

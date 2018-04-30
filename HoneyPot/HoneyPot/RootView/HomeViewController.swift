@@ -36,6 +36,7 @@ class HomeViewController: UITabBarController {
         messagesNavController.tabBarItem.image =  UIImage(named: "icons8-new-post-50")?.withRenderingMode(.alwaysOriginal)
         messagesNavController.tabBarItem.selectedImage =  UIImage(named: "icons8-new-post-filled-50")?.withRenderingMode(.alwaysOriginal)
         messagesNavController.tabBarItem.title = "Chats"
+        
 
 
         

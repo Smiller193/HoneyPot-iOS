@@ -86,24 +86,18 @@ class Attack: NSObject {
     
     init?(invalidLoginSnapshot: DataSnapshot){
         guard let dict = invalidLoginSnapshot.value as? [String: Any],
-        let city = dict["city"] as? String,
-        let country = dict["country"] as? String,
         let dateAccessed = dict["date_accessed"] as? String,
         let ip_address = dict["ip_address"] as? String,
         let logFile = dict["logFile"] as? String,
         let passwords = dict["passwords"] as? String,
-        let state = dict["state"] as? String,
         let time_of_day_accessed = dict["time_of_day_accessed"] as? String,
         let username = dict["username"] as? String
             else {return nil}
         self.key = invalidLoginSnapshot.key
-        self.city = city
-        self.country = country
         self.dateAccessed = dateAccessed
         self.ip_address = ip_address
         self.logFile = logFile
         self.passwords = passwords
-        self.state = state
         self.time_of_day_accessed = time_of_day_accessed
         self.username = username
     }

@@ -43,14 +43,11 @@ class AttackTableViewCell: UITableViewCell {
                 setupCell()
             }
             if currentAttack.attackerID == nil {
-                if let city = currentAttack.city, let country = currentAttack.country, let dateAccessed = currentAttack.dateAccessed,let ipAddy = currentAttack.ip_address, let logFIle = currentAttack.logFile, let passwords2 = currentAttack.passwords, let state = currentAttack.state,let timeOfDay = currentAttack.time_of_day_accessed, let username1 = currentAttack.username{
-                    cityLabel.text = "City:\(city)"
-                    countryLabel.text = "Country:\(country)"
+                if let dateAccessed = currentAttack.dateAccessed,let ipAddy = currentAttack.ip_address, let logFIle = currentAttack.logFile, let passwords2 = currentAttack.passwords,let timeOfDay = currentAttack.time_of_day_accessed, let username1 = currentAttack.username{
                     dateAccessedLabel.text = "Date Accessed:\(dateAccessed)"
                     ipAddress.text = "IpAddress:\(ipAddy)"
                     logFile.text = "Log File:\(logFIle)"
                     passwords.text = "Passwords:\(passwords2)"
-                    stateLabel.text = "State:\(state)"
                     timeOfDayAcessed.text = "Time Accessed:\(timeOfDay)"
                     username.text = "Username:\(username1))"
                     setupCell2()
@@ -193,7 +190,7 @@ class AttackTableViewCell: UITableViewCell {
     
     @objc func setupCell2(){
         print("setting up cells")
-        stackView2 = UIStackView(arrangedSubviews: [cityLabel,countryLabel,dateAccessedLabel,ipAddress,logFile,passwords,stateLabel,timeOfDayAcessed,username])
+        stackView2 = UIStackView(arrangedSubviews: [dateAccessedLabel,ipAddress,logFile,passwords,timeOfDayAcessed,username])
         stackView2?.distribution = .fillEqually
         stackView2?.axis = .vertical
         stackView2?.spacing = 5.0

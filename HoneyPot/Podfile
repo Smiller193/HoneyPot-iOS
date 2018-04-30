@@ -22,5 +22,6 @@ target 'HoneyPot' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'IGListKit', :git => 'https://github.com/Instagram/IGListKit.git', :branch => 'master'
+  pod 'RevealingSplashView'
   # Pods for HoneyPot
 end

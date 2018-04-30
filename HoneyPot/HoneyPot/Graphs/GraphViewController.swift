@@ -16,7 +16,9 @@ import SVProgressHUD
 
 class GraphViewController: UITableViewController {
     var cellID = "cellID"
+    let dispatchGroup = DispatchGroup()
     let mapVC = MapViewController()
+    let graphWebVc = GraphWebViewController()
     var pin: PinAnnotation?
     var Attacks = [AttackArray]()
     var pinArray = [PinAnnotation]()
@@ -39,8 +41,8 @@ class GraphViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = mapButton
         let graphButton = UIBarButtonItem(image: UIImage(named: "icons8-combo-chart-50"), style: .plain, target: self, action: #selector(presentGraphs))
         self.navigationItem.rightBarButtonItem = graphButton
-        paginatePost()
         observeAttacks()
+        paginatePost()
 
     }
     
@@ -55,37 +57,44 @@ class GraphViewController: UITableViewController {
     }
     
     @objc func presentGraphs(){
+        print("presenting graphs")
+        self.navigationController?.pushViewController(graphWebVc, animated: true)
         
     }
     
     @objc func observeAttacks(){
        attackHandle = AtackService.observeAttacks { (ref, Attack) in
-        SVProgressHUD.show(withStatus: "Attack Attempt Loading...")
         if let long = Attack?.longitude, let lat = Attack?.latitude {
             self.pin = PinAnnotation(title: "Alert", subtitle: "Attack Detected From This Location", coordinate: CLLocationCoordinate2DMake(Double(lat)!, Double(long)!), logFile: (Attack?.logFile)!)
             self.mapVC.mapView.addAnnotation(self.pin!)
         }
         self.attackRef = ref
-        var AttacksArray = AttackArray(attackNumber: (Attack?.key)!, attack: Attack!)
+        let AttacksArray = AttackArray(attackNumber: (Attack?.key)!, attack: Attack!)
         self.Attacks.append(AttacksArray)
         self.tableView.reloadData()
-        SVProgressHUD.dismiss(withDelay: 2)
         }
+
         
     }
     @objc func paginatePost(){
         AtackService.fetchUserAttack(for: "", currentAttackCount: 0, isFinishedPaging: isFinishedPaging) { (Attack, pagingResult) in
-            var AttacksArray = AttackArray(attackNumber: Attack.key!, attack: Attack)
+            self.dispatchGroup.enter()
+            _ = AttackArray(attackNumber: Attack.key!, attack: Attack)
+            self.dispatchGroup.leave()
             self.isFinishedPaging = pagingResult
-//            self.Attacks.append(AttacksArray)
-//            self.tableView.reloadData()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            // dismiss the revealing view
+            self.tableView.reloadData()
+            NotificationCenter.default.post(name: heartAttackNotificationName, object: nil)
         }
     }
     
     @objc func paginatePostWithKey(lastKey: String, attackCount: Int, isFinishedPaging: Bool){
         AtackService.fetchUserAttack(for: lastKey, currentAttackCount: attackCount, isFinishedPaging: isFinishedPaging) { (Attack, pagingResult) in
             print("tried it")
-            var AttacksArray = AttackArray(attackNumber: Attack.key!, attack: Attack)
+            let AttacksArray = AttackArray(attackNumber: Attack.key!, attack: Attack)
             self.isFinishedPaging = pagingResult
             self.Attacks.append(AttacksArray)
             self.tableView.reloadData()

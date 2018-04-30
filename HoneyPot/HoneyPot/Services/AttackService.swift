@@ -66,7 +66,7 @@ struct AtackService {
                 }
                 completion(attackRef,attack)
             }
-            if snapshot.childrenCount == 9 {
+            if snapshot.childrenCount == 6 {
                 guard let attack = Attack(invalidLoginSnapshot: snapshot) else {
                     return
                 }
