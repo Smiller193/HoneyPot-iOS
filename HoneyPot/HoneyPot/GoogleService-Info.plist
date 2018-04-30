@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>36539420563-9l329ludu76bp550juqm4uof8qinj192.apps.googleusercontent.com</string>
+	<string>36539420563-tqg7cinom8q94h5rj827r6k2h1koesd5.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.36539420563-9l329ludu76bp550juqm4uof8qinj192</string>
+	<string>com.googleusercontent.apps.36539420563-tqg7cinom8q94h5rj827r6k2h1koesd5</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDB6-CD8qavd57xoWLXu0VD8Ah798_h02E</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.Temple.HoneyPot</string>
+	<string>com.Temple.HoneyPot1</string>
 	<key>PROJECT_ID</key>
 	<string>honeypot-1c941</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:36539420563:ios:260e2f822efbec66</string>
+	<string>1:36539420563:ios:fa9775086d51f931</string>
 	<key>DATABASE_URL</key>
 	<string>https://honeypot-1c941.firebaseio.com</string>
 </dict>

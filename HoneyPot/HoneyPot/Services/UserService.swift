@@ -39,21 +39,21 @@ struct UserService {
         }
     }
     // Will update device token for the user
-//    static func updateDeviceToken(deviceToken: String, userId: String){
-//        let userAttrs = ["fcmToken": deviceToken] as [String : Any]
-//
-//        let ref = Database.database().reference().child("users").child(userId)
-//        ref.updateChildValues(userAttrs){ (error, ref) in
-//            if let error = error {
-//                assertionFailure(error.localizedDescription)
-//                return
-//            }
-//            ref.observeSingleEvent(of: .value, with: { (snapshot) in
-//                let updatedUser = User(snapshot: snapshot)
-//                print(updatedUser as Any)
-//            })
-//        }
-//    }
+    static func updateDeviceToken(deviceToken: String, userId: String){
+        let userAttrs = ["fcmToken": deviceToken] as [String : Any]
+        print(userId)
+        let ref = Database.database().reference().child("users").child(userId)
+        ref.updateChildValues(userAttrs){ (error, ref) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                return
+            }
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                let updatedUser = User(snapshot: snapshot)
+                print(updatedUser as Any)
+            })
+        }
+    }
     //Will allow you to edit user data in firebase
     static func edit(username: String, completion: @escaping (User?) -> Void) {
         let userAttrs = ["username": username] as [String : Any]

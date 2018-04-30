@@ -56,7 +56,6 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
     }
     
     func setUpCell(){
-        print("Attempting to setup cell")
         addSubview(arrowLabel)
         addSubview(attackLabel)
         arrowLabel.textColor = UIColor.black

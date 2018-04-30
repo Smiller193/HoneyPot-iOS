@@ -8,13 +8,15 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 typealias FIRUser = FirebaseAuth.User
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
+    var strDeviceToken = ""
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -25,9 +27,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureInitialRootViewController(for: window)
 //        GMSServices.provideAPIKey("AIzaSyB88ZXgUfRZ82m_R5_sIixIoTNxtTtX0MI")
 //        GMSPlacesClient.provideAPIKey("AIzaSyB88ZXgUfRZ82m_R5_sIixIoTNxtTtX0MI")
+        attemptRegisterForNotifcations(application: application)
         // Override point for customization after application launch.
         return true
     }
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("registerd for notifs and user device token is: \(deviceToken)")
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Registered with FCM with token: \(fcmToken)")
+        self.strDeviceToken = fcmToken
+    }
+    
+    //listen for user notifcations
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.alert)
+    }
+    
+    private func attemptRegisterForNotifcations(application: UIApplication) {
+        print("attemping to register push apns...")
+        //request auth
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        let options: UNAuthorizationOptions = [.alert,.badge,.sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { (granted, err) in
+            if let error = err {
+                print("auth failed: \(error)")
+            }
+            if granted {
+                print("auth granted ....")
+            }else{
+                print("auth denied....")
+            }
+        }
+        
+        application.registerForRemoteNotifications()
+    }
+    
+  
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -45,6 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        application.applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

@@ -24,7 +24,7 @@ class AuthService {
             }
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             //take this out for now this is here for push notifs that may or may not be used somewhere down the line
-//            UserService.updateDeviceToken(deviceToken: appDelegate.strDeviceToken, userId: (user?.uid)!)
+            UserService.updateDeviceToken(deviceToken: appDelegate.strDeviceToken, userId: (user?.uid)!)
             return completion(user)
         }
     }

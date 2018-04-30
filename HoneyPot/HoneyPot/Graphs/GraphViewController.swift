@@ -11,11 +11,15 @@ import Alamofire
 import AlamofireNetworkActivityIndicator
 import SwiftyJSON
 import Firebase
-
+import MapKit
+import SVProgressHUD
 
 class GraphViewController: UITableViewController {
     var cellID = "cellID"
+    let mapVC = MapViewController()
+    var pin: PinAnnotation?
     var Attacks = [AttackArray]()
+    var pinArray = [PinAnnotation]()
     var attackRef: DatabaseReference?
     var attackHandle: DatabaseHandle = 0
     override func viewDidLoad() {
@@ -39,10 +43,15 @@ class GraphViewController: UITableViewController {
         observeAttacks()
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
 
     
     @objc func presentMap(){
         print("Button pressed")
+        self.navigationController?.pushViewController(mapVC, animated: true)
     }
     
     @objc func presentGraphs(){
@@ -51,16 +60,21 @@ class GraphViewController: UITableViewController {
     
     @objc func observeAttacks(){
        attackHandle = AtackService.observeAttacks { (ref, Attack) in
-            self.attackRef = ref
+        SVProgressHUD.show(withStatus: "Attack Attempt Loading...")
+        if let long = Attack?.longitude, let lat = Attack?.latitude {
+            self.pin = PinAnnotation(title: "Alert", subtitle: "Attack Detected From This Location", coordinate: CLLocationCoordinate2DMake(Double(lat)!, Double(long)!), logFile: (Attack?.logFile)!)
+            self.mapVC.mapView.addAnnotation(self.pin!)
+        }
+        self.attackRef = ref
         var AttacksArray = AttackArray(attackNumber: (Attack?.key)!, attack: Attack!)
         self.Attacks.append(AttacksArray)
         self.tableView.reloadData()
+        SVProgressHUD.dismiss(withDelay: 2)
         }
         
     }
     @objc func paginatePost(){
         AtackService.fetchUserAttack(for: "", currentAttackCount: 0, isFinishedPaging: isFinishedPaging) { (Attack, pagingResult) in
-            print("tried it")
             var AttacksArray = AttackArray(attackNumber: Attack.key!, attack: Attack)
             self.isFinishedPaging = pagingResult
 //            self.Attacks.append(AttacksArray)
