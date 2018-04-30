@@ -157,7 +157,9 @@ extension AppDelegate {
         let logFileVC = LogFileViewController()
         print(urlContents)
         logFileVC.navigationItem.title = navTitle
-        logFileVC.textView.text = urlContents
+        var finalContents = urlContents.replacingOccurrences(of: "/<br/>", with: "")
+        finalContents = finalContents.replacingOccurrences(of: "<br/>", with: "")
+        logFileVC.textView.text = finalContents
         print(self.urlContents)
         homeNavController.pushViewController(logFileVC, animated: false)
     }

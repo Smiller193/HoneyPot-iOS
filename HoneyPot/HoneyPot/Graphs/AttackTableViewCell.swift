@@ -245,11 +245,9 @@ class AttackTableViewCell: UITableViewCell {
     
     @objc func presentVc(navTitle: String, urlContents: String){
         let logFileVC = LogFileViewController()
-        print(urlContents)
         logFileVC.navigationItem.title = navTitle
        var finalContents = urlContents.replacingOccurrences(of: "/<br/>", with: "")
         finalContents = finalContents.replacingOccurrences(of: "<br/>", with: "")
-        print(finalContents)
         logFileVC.textView.text = finalContents
         print(self.urlContents)
         self.graphViewController?.navigationController?.pushViewController(logFileVC, animated: false)

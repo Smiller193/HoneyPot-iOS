@@ -52,7 +52,9 @@ class MapViewController: UIViewController,MKMapViewDelegate {
     }
     
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
+    }
     
     @objc func grabTextFile(urlString: String, navTitle: String){
         let dispatchGroup = DispatchGroup()
@@ -89,7 +91,9 @@ class MapViewController: UIViewController,MKMapViewDelegate {
         let logFileVC = LogFileViewController()
         print(urlContents)
         logFileVC.navigationItem.title = navTitle
-        logFileVC.textView.text = urlContents
+        var finalContents = urlContents.replacingOccurrences(of: "/<br/>", with: "")
+        finalContents = finalContents.replacingOccurrences(of: "<br/>", with: "")
+        logFileVC.textView.text = finalContents
         print(self.urlContents)
         self.navigationController?.pushViewController(logFileVC, animated: false)
     }
